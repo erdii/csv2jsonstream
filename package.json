@@ -1,6 +1,6 @@
 {
   "name": "@erdii/csv2jsonstream",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "the cheapest csv to json-array converter EVER!",
   "main": "csv2jsonstream.js",
   "bin": "./csv2jsonstream.js",
@@ -11,7 +11,13 @@
     "type": "git",
     "url": "git+https://github.com/erdii/csv2jsonstream.git"
   },
-  "keywords": ["csv", "json", "converter", "stream", "array"],
+  "keywords": [
+    "csv",
+    "json",
+    "converter",
+    "stream",
+    "array"
+  ],
   "author": "erdii <erdiicodes@gmail.com>",
   "license": "MIT",
   "bugs": {
