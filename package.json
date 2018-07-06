@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "the cheapest csv to json-array converter EVER!",
   "main": "csv2jsonstream.js",
-  "bin": "./csv2jsonsteram.js",
+  "bin": "./csv2jsonstream.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
