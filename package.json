@@ -1,5 +1,5 @@
 {
-  "name": "csv2jsonstream",
+  "name": "@erdii/csv2jsonstream",
   "version": "0.0.1",
   "description": "the cheapest csv to json-array converter EVER!",
   "main": "csv2jsonstream.js",
