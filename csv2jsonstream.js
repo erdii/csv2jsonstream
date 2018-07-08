@@ -42,7 +42,7 @@ function exitHandler() {
 }
 
 process.on("SIGINT", function() {
-	console.error("Exiting because of SIGKILL...");
+	console.error("Exiting because of SIGINT...");
 	exitHandler();
 });
 
