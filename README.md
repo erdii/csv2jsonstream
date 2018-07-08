@@ -12,4 +12,5 @@ the cheapest csv to json-array converter EVER!
 
 ### usage
 
-`csv2jsonstream input.csv > output.json`
+* Read csv from file: `csv2jsonstream input.csv > output.json`
+* Read csv from stdin: `cat input.csv | csv2jsonstream > output.json`

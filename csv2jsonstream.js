@@ -5,18 +5,49 @@ const Papa = require("papaparse");
 
 let state = {
 	inputPath: process.argv[2],
-	notFirstLine: false,
+	inputStream: null,
+	get hasInputPath() {
+		return !!this.inputPath;
+	},
+
+	// stats
+	outLines: 0,
+	get notFirstLine() {
+		return this.outLines > 0;
+	},
 };
 
-if (!path.isAbsolute(state.inputPath)) {
-	state.inputPath = path.resolve(process.cwd(), state.inputPath);
+if (state.hasInputPath) {
+	// normalize input path
+	if (!path.isAbsolute(state.inputPath)) {
+		state.inputPath = path.resolve(process.cwd(), state.inputPath);
+	}
+
+	state.inputStream = fs.createReadStream(state.inputPath, {
+		encoding: "utf8"
+	});
+} else {
+	process.stdin.setEncoding("utf8");
+	state.inputStream = process.stdin;
 }
 
-state.inputFileStream = fs.createReadStream(state.inputPath);
-
+// open output array
 console.log("[");
 
-Papa.parse(state.inputFileStream, {
+// output a "]" before exiting
+function exitHandler() {
+	console.log("]");
+	console.error(`Processed Lines: ${state.outLines}`);
+	process.exit();
+}
+
+process.on("SIGINT", function() {
+	console.error("Exiting because of SIGKILL...");
+	exitHandler();
+});
+
+// configure and start the csv parser
+Papa.parse(state.inputStream, {
 	header: true,
 	dynamicTyping: true,
 	step: row => {
@@ -24,11 +55,7 @@ Papa.parse(state.inputFileStream, {
 			(state.notFirstLine ? "," : "") + JSON.stringify(row.data[0])
 		);
 
-		if (!state.notFirstLine) {
-			state.notFirstLine = true;
-		}
+		state.outLines++;
 	},
-	complete: () => {
-		console.log("]");
-	}
+	complete: exitHandler,
 });
